@@ -1,5 +1,7 @@
 import csv
+import pandas as pd
 
+# Function used to display the menu choices
 def show_menu():
     print("1. Read & display stats for the 12 players with the most HRs")
     print("2. Display players with home runs above a certain threshold, in alphabetical order")
@@ -8,12 +10,12 @@ def show_menu():
     print("5. Exit the program")
 
 
-# TODO: Fix output format
+# Function that reads and displays stats for select players
 def choice1(file):
-    for i in range(1,13):
-        print(file.readline())
+    df = pd.read_csv(file, sep="\t", encoding="utf-16le")
+    print(df)
 
-
+# Function that displays in alphabetical order players that satisfy a certain threshold
 def choice2(file, x):
     players = []
     for line in file:
