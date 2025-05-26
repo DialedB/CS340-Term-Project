@@ -53,7 +53,8 @@ def show_menu():
 # Function that reads the text file and displays first 5 lines
 def choice1(file):
     df = pd.read_csv(file, sep="\t", encoding="utf-16le")
-    print(df.head())
+    for i in range(1,5):
+        print(df[i])
 
 def choice2():
     global hidden_layers
