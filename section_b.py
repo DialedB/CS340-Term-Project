@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import StandardScaler
 
 # Path of the txt file containing our dataset
 file_path = "original_text_data.txt"
@@ -25,12 +24,6 @@ y = clean_data['Target']
 
 # Train/test split with 80% training size
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=42)
-
-# StandardScaler object
-scaler = StandardScaler()
-# MLP works better with scaled data
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
 
 # Global variable which will store user input
 hidden_layers = (100,)  # 1 hidden layer with 100 neurons (default)
