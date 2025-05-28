@@ -1,10 +1,9 @@
-import pandas as pd
 import re
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.neural_network import MLPClassifier
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
 
 # Path of the txt file containing our dataset
 file_path = "original_text_data.txt"
@@ -53,7 +52,8 @@ def show_menu():
     print("3. Choose the size of the training step (0.001 - 0.5, [ENTER] for adaptable)")
     print("4. Train on 80% of labeled data, display progress graph")
     print("5. Classify the unlabeled data, output training report and confusion matrix")
-    print("6. Exit the program")
+    print("6. Predict if student will drop out or graduate")
+    print("7. Exit the program")
 
 # Function that reads the text file and displays first 5 lines
 def choice1(file):
@@ -113,5 +113,27 @@ def choice5():
         return
     print("Evaluating on test data...")
     y_pred = model.predict(X_test)
-    print("\nClassification Report:\n", classification_report(y_test, y_pred, target_names=['Fail', 'Graduate']))
+    print("\nClassification Report:\n", classification_report(y_test, y_pred, target_names=['Dropout', 'Graduate']))
     print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+def choice6():
+    if model is None:
+        print("Please train the model first (option 4).")
+        return
+
+    try:
+        index = int(input(f"Enter index (0 to {len(X_test) - 1}) of a student in the test set: "))
+        if 0 <= index < len(X_test):
+            student_features = X_test.iloc[[index]]
+            actual = y_test.iloc[index]
+            prediction = model.predict(student_features)[0]
+
+            predicted_label = "Graduate" if prediction == 1 else "Dropout"
+            actual_label = "Graduate" if actual == 1 else "Dropout"
+
+            print(f"\nPrediction for student at index {index}: {predicted_label}")
+            print(f"Actual outcome: {actual_label}")
+        else:
+            print("Invalid index. Please try again.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")

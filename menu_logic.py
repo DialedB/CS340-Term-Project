@@ -56,7 +56,9 @@ def a():
 
 # Section B of Term Project
 def b():
-    while True:
+    choice = True
+
+    while choice:
         section_b.show_menu()
         try:
             x = int(input("Enter a choice: "))
@@ -77,7 +79,9 @@ def b():
             elif x == 5:
                 section_b.choice5()
             elif x == 6:
-                print("Returning to main menu...")
+                section_b.choice6()
+            elif x == 7:
+                choice = False
                 break
             else:
                 print("Invalid choice. Please select a number from 1 to 6.")
