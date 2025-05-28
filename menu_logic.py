@@ -54,28 +54,32 @@ def a():
             print("\nProgram interrupted. Exiting...")
             break
 
-
 # Section B of Term Project
 def b():
-    # Allows for use of while loop
-    choice = True
-    # Runs while choice holds the value 'True'
-    while choice:
-        # Try block looks for invalid input and allows for error trapping
+    while True:
+        section_b.show_menu()
         try:
-            # Calls the show menu function from section_b.py
-            section_b.show_menu()
-            # Asks the user for input
             x = int(input("Enter a choice: "))
-            if x == 1:
-                with open("original_text_data.txt", "r") as f:
-                    section_b.choice1(f)
-            # TODO: Add the 6 choice in if loops
-        # Prints the warning if the user input is not a number
         except ValueError:
             print("Invalid input. Please enter a number.")
-        # Prints the error and exits program if user interrupts the execution of the
-        # program using a keyboard action (ex. Ctrl+C)
-        except KeyboardInterrupt:
-            print("\nProgram interrupted. Exiting...")
-            break
+            continue  # Go back to the menu
+
+        try:
+            if x == 1:
+                with open("original_text_data.txt", "r", encoding="utf-16le") as f:
+                    section_b.choice1(f)
+            elif x == 2:
+                section_b.choice2()
+            elif x == 3:
+                section_b.choice3()
+            elif x == 4:
+                section_b.choice4()
+            elif x == 5:
+                section_b.choice5()
+            elif x == 6:
+                print("Returning to main menu...")
+                break
+            else:
+                print("Invalid choice. Please select a number from 1 to 6.")
+        except Exception as e:
+            print("An error occurred during execution:", e)
