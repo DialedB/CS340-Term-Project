@@ -11,7 +11,7 @@ file_path = "original_text_data.txt"
 # Dataset that consists of data in our tab delimited txt file
 data = pd.read_csv(file_path, sep="\t", encoding="utf-16le")
 
-# Fixes any 'broken' floats (ex. 13.428.571.428.571.400)
+# Function that fixes any 'broken' floats (ex. 13.428.571.428.571.400)
 def fix_broken_floats(df):
     float_cols = df.select_dtypes(include='object').columns
     pattern = re.compile(r"(\d+\.\d{1,4})")
@@ -20,6 +20,7 @@ def fix_broken_floats(df):
                                 if isinstance(x, str) and pattern.search(x) else x)
     return df
 
+# Applies the fix_broken_floats function in order to clean up the data
 data = fix_broken_floats(data)
 
 # Clean dataset (dropped any missing values)
@@ -41,7 +42,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random
 
 # Global variables
 hidden_layers = (100,)  # 1 hidden layer with 100 neurons (default)
-learning_rate = 'adaptive'  # learning rate setting (default)
+learning_rate = 'adaptive'  # Learning rate setting (default)
 model = None
 loss_curve = None
 
@@ -62,6 +63,7 @@ def choice1(file):
     print("\nFirst 5 rows of the dataset:\n")
     print(df.head())
 
+# Function that asks the user for size of hidden layers of the model's MLP topology
 def choice2():
     global hidden_layers
     user_input = input("Enter hidden layer sizes separated by '-' (e.g. 6-12-2): ").strip()
@@ -75,6 +77,7 @@ def choice2():
     except Exception as e:
         print("Invalid input format. Please enter numbers separated by '-'. Error:", e)
 
+# Function that lets the user pick the model's learning rate, leaving adaptive if user doesn't want to give input
 def choice3():
     global learning_rate
     user_input = input("Enter learning rate (0.001 - 0.5), or press ENTER for 'adaptive': ").strip()
@@ -91,6 +94,7 @@ def choice3():
             print("Invalid input. Using default:", learning_rate)
     print("Learning rate set to:", learning_rate)
 
+# Trains the model and displays a graph of the Training Loss Curve
 def choice4():
     global model, loss_curve
     print("Training model...")
@@ -107,6 +111,7 @@ def choice4():
     plt.grid(True)
     plt.show()
 
+# Classifies the unlabeled data, outputs training report and confusion matrix
 def choice5():
     if model is None:
         print("Please train the model first (option 4).")
@@ -116,6 +121,7 @@ def choice5():
     print("\nClassification Report:\n", classification_report(y_test, y_pred, target_names=['Dropout', 'Graduate']))
     print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
+# Function that lets the model predict if a student holding the user inputted index is going to Drop Out or Graduate
 def choice6():
     if model is None:
         print("Please train the model first (option 4).")
