@@ -12,7 +12,7 @@ file_path = "original_text_data.txt"
 # Dataset that consists of data in our tab delimited txt file
 data = pd.read_csv(file_path, sep="\t", encoding="utf-16le")
 
-# --- FIX MALFORMED FLOATS ---
+# Fixes any 'broken' floats (ex. 13.428.571.428.571.400)
 def fix_broken_floats(df):
     float_cols = df.select_dtypes(include='object').columns
     pattern = re.compile(r"(\d+\.\d{1,4})")
