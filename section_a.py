@@ -1,4 +1,3 @@
-import csv
 import pandas as pd
 
 # Function used to display the menu choices
@@ -12,55 +11,48 @@ def show_menu():
 
 # Function that reads and displays stats for select players
 def choice1(file):
-    df = pd.read_csv(file, sep="\t", encoding="utf-16le")
-    print(df)
+    df = pd.read_csv(file, sep=";", encoding="utf-16le")
+    df.columns = ['Name', 'Games', 'Home Runs', 'Strikes']
+    df.sort_values(by='Home Runs', ascending=False, inplace=True)
+    print(df.head(12))
+
 
 # Function that displays in alphabetical order players that satisfy a certain threshold
 def choice2(file, x):
-    players = []
-    for line in file:
-        parts = line.strip().split(';')  # Adjust delimiter if needed
-        name = parts[0].strip()
-        try:
-            home_runs = int(parts[2].strip())
-            if home_runs > x:
-                players.append(name)
-        except (IndexError, ValueError):
-            continue  # Skip lines with invalid data
-    print("Players: ", players)
-    for name in sorted(players):
-        print(name)
+    df = pd.read_csv(file, sep=";", encoding="utf-16le")
+    df.columns = ['Name', 'Games', 'Home Runs', 'Strikes']
+    filtered_df = df[df['Home Runs'] >= x]
+    print(filtered_df)
 
 
-# TODO: Fix output format
+# Function that calculates HR/G and SO/G, saves in file and displays the data
 def choice3(file):
-    players = []
-    for line in file:
-        parts = line.strip().split(';')
-        try:
-            name = parts[0].strip()
-            games = int(parts[1].strip())
-            home_runs = int(parts[2].strip())
-            strikes = int(parts[3].strip())
-            if games == 0:
-                continue  # Avoid division by zero
-            player_data = [
-                name,
-                games,
-                home_runs,
-                strikes,
-                home_runs / games,
-                strikes / games
-            ]
-            players.append(player_data)
-        except (IndexError, ValueError):
-            continue
-    # Save to CSV without header
-    with open("mlbdata_updated.csv", mode='w', newline='') as f:
-        writer = csv.writer(f, delimiter=';')
-        writer.writerows(players)
+    df = pd.read_csv(file, sep=";", encoding="utf-16le")
+    df.columns = ['Name', 'Games', 'Home Runs', 'Strikes']
+
+    df['HR/G'] = df['Home Runs'] / df['Games']
+    df['SO/G'] = df['Strikes'] / df['Games']
+
+    output_file = 'mlbdata_updated'
+    df.to_csv(output_file, index=False)
+
+    print(df)
 
 
-# TODO: Custom sorting by user input
+# Function that allows for custom sorting by user input
 def choice4(file, field):
-    players = []
+    try:
+        df = pd.read_csv(file, sep=";", encoding="utf-16le")
+        df.columns = ['Name', 'Games', 'Home Runs', 'Strikes']
+
+        if field not in df.columns:
+            raise ValueError(f"'{field}' is not a valid column. Choose from: {list(df.columns)}")
+
+        df.sort_values(by=field, ascending=False, inplace=True)
+        print(df)
+    except FileNotFoundError:
+        print(f"Error: The file '{file}' was not found.")
+    except ValueError as ve:
+        print(f"Invalid input: {ve}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
