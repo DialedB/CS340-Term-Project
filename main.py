@@ -1,5 +1,6 @@
 import menu_logic
 
+# Main function consisting of the main menu for the application
 def main():
     print("Welcome to the CS340 Term Project\n")
 
@@ -21,5 +22,6 @@ def main():
         else:
             print("Invalid input. Please enter 0, 1, or 2.")
 
+# Makes sure to run the main function first
 if __name__ == "__main__":
     main()
