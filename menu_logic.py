@@ -76,22 +76,22 @@ def b():
             if x == 1:
                 # Opens the needed file in order to pass it in the function
                 with open("original_text_data.txt", "r", encoding="utf-16le") as f:
-                    # Runs the choice_1 function from section_b.py
+                    # Runs the choice1 function from section_b.py
                     section_b.choice1(f)
             elif x == 2:
-                # Runs the choice_2 function from section_b.py
+                # Runs the choice2 function from section_b.py
                 section_b.choice2()
             elif x == 3:
-                # Runs the choice_3 function from section_b.py
+                # Runs the choice3 function from section_b.py
                 section_b.choice3()
             elif x == 4:
-                # Runs the choice_4 function from section_b.py
+                # Runs the choice4 function from section_b.py
                 section_b.choice4()
             elif x == 5:
-                # Runs the choice_5 function from section_b.py
+                # Runs the choice5 function from section_b.py
                 section_b.choice5()
             elif x == 6:
-                # Runs the choice_6 function from section_b.py
+                # Runs the choice6 function from section_b.py
                 section_b.choice6()
             elif x == 7:
                 print("Exiting...")
