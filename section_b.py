@@ -180,7 +180,7 @@ def run_one_experiment(topology, learning_rate, train_size, randomize, X, y):
     print(f"Learning rate: {learning_rate}")
     print(f"Train size: {train_size}")
     print(f"Randomization: {randomize}")
-    # Creates the train-test split based on the parameters (randomize = False/True)
+    # Creates the train-test split based on the parameters (randomize = False\true)
     if randomize:
         # Uses random state for consistent randomization
         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_size, random_state=42)
@@ -404,13 +404,13 @@ def generate_output_files():
     # The training data consists of the X_train and y_train data
     training_data = pd.concat([best_result['X_train'], best_result['y_train']], axis = 1)
     # A .txt file is then created to store the training data
-    training_data.to_csv('training_data.txt', sep = "/t", index = False)
+    training_data.to_csv('training_data.txt', sep = "\t", index = False)
     # A .txt file is created to store the unlabeled test data
-    best_result['X_test'].to_csv('testing_data_unlabeled.txt', sep = "/t", index = False)
+    best_result['X_test'].to_csv('testing_data_unlabeled.txt', sep = "\t", index = False)
     # The labeled testing data consists of the X_test and y_test data
     testing_labeled = pd.concat([best_result['X_test'], best_result['y_test']], axis = 1)
     # A.txt file is then created to store the labeled test data
-    testing_labeled.to_csv('testing_data_labeled.txt', sep = "/t", index = False)
+    testing_labeled.to_csv('testing_data_labeled.txt', sep = "\t", index = False)
     # The output_data dataframe consists of the predictions and actual values
     output_data = pd.DataFrame({
         'Predicted_Label': best_result['y_pred'],
@@ -419,7 +419,7 @@ def generate_output_files():
         'Actual_Class': ['Graduate' if a == 1 else 'Dropout' for a in best_result['y_test'].values]
     })
     # The output_data dataframe is then exported into a .txt file
-    output_data.to_csv('output_data.txt', sep = "/t", index = False)
+    output_data.to_csv('output_data.txt', sep = "\t", index = False)
     # Notifies the user of which files were created
     print("Generated output files: training_data.txt, testing_data_unlabeled.txt, testing_data_labeled.txt, output_data.txt")
 
@@ -487,7 +487,7 @@ def choice6():
             # Predicts the target value
             prediction = current_model.predict(student_features_scaled)[0]
             # Calculates the prediction probability (confidence)
-            prediction_probability = current_model.prediction_proba(student_features_scaled)[0]
+            prediction_probability = current_model.predict_proba(student_features_scaled)[0]
             # Sets the labels back to strings as they were converted to binary values
             predicted_label = "Graduate" if prediction == 1 else "Dropout"
             actual_label = "Graduate" if actual == 1 else "Dropout"
@@ -497,7 +497,7 @@ def choice6():
             print(f"Actual outcome: {actual_label}")
             print(f"Prediction confidence: {max(prediction_probability):.3f}")
             print(f"Probabilities - Dropout: {prediction_probability[0]:.3f}, Graduate: {prediction_probability[1]:.3f}")
-            # Checks if prediction is correct and notifies the user)
+            # Checks if prediction is correct and notifies the user
             if prediction == actual:
                 print("Correct!")
             else:
