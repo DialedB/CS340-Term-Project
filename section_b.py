@@ -347,7 +347,7 @@ def create_collective_graph():
             label=label
         )
     # Creates a collective graph that consists of the above created singular plots
-    plt.title('Collective Training Loss Curves - All 18 Experiments', fontsize = 14, fontweight = 'bold')
+    plt.title('Collective Training Loss Curves - All Experiments', fontsize = 14, fontweight = 'bold')
     plt.xlabel('Iterations', fontsize = 10)
     plt.ylabel('Loss', fontsize = 10)
     plt.grid(True, alpha=0.3)
