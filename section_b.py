@@ -143,3 +143,57 @@ def choice6():
             print("Invalid index. Please try again.")
     except ValueError:
         print("Invalid input. Please enter a number.")
+
+def main():
+    # Allows for use of while loop
+    choice = True
+    # Runs while choice holds the value 'True'
+    while choice:
+        # Try block that looks for invalid input allowing for error catching
+        try:
+            # Calls the function show_menu() from py
+            show_menu()
+            # Asks user for input
+            x = int(input("Enter a choice: "))
+        # Prints the warning if user input is not a number
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue  # Goes back to the menu
+        # Another try block for error catching
+        try:
+            # Checks for user input and runs the appropriate choice
+            if x == 1:
+                # Opens the needed file in order to pass it in the function
+                with open("original_text_data.txt", "r", encoding="utf-16le") as f:
+                    # Runs the choice1 function from py
+                    choice1(f)
+            elif x == 2:
+                # Runs the choice2 function from py
+                choice2()
+            elif x == 3:
+                # Runs the choice3 function from py
+                choice3()
+            elif x == 4:
+                # Runs the choice4 function from py
+                choice4()
+            elif x == 5:
+                # Runs the choice5 function from py
+                choice5()
+            elif x == 6:
+                # Runs the choice6 function from py
+                choice6()
+            elif x == 7:
+                print("Exiting...")
+                # Since choice 7 is 'Exit the program',
+                # it sets the choice to hold the value 'False' in order to break the while loop
+                choice = False
+                break
+            else:
+                # Warns user to input a number in the given range
+                print("Invalid choice. Please select a number from 1 to 7.")
+        # Print the warning if an exception happens
+        except Exception as e:
+            print("An error occurred during execution:", e)
+
+if __name__ == "__main__":
+    main()

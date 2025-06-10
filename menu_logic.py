@@ -16,17 +16,17 @@ def a():
             # Checks for user input section_and runs the appropriate menu choice
             if x == 1:
                 # Opens the needed file in order to pass it in the function
-                with open("mlbdata.csv", 'r') as f:
+                with open("boljevic_red_sox.txt", 'r') as f:
                     section_a.choice1(f)
             elif x == 2:
                 # Asks for additional user input because it is needed for this menu choice
                 y = int(input("Enter a threshold: "))
                 # Opens the needed file in order to pass it in the function
-                with open("mlbdata.csv", 'r') as f:
+                with open("boljevic_red_sox.txt", 'r') as f:
                     section_a.choice2(f, y)
             elif x == 3:
                 # Opens the needed file in order to pass it in the function
-                with open("mlbdata.csv", 'r') as f:
+                with open("boljevic_red_sox.txt", 'r') as f:
                     section_a.choice3(f)
                 # Opens the needed file in order to pass it in the function
                 with open("mlbdata_updated.csv", 'r') as f1:
@@ -35,7 +35,7 @@ def a():
                 # Asks for additional user input because it is needed for this menu choice
                 z = input("Enter a sorting field: ")
                 # Opens the needed file in order to pass it in the function
-                with open("mlbdata.csv", 'r') as f:
+                with open("boljevic_red_sox.txt", 'r') as f:
                     section_a.choice4(f, z)
             elif x == 5:
                 print("Exiting...")
