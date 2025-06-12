@@ -80,7 +80,8 @@ def choice4(file, field):
     # Warns the user that the input they gave is not valid
     except ValueError as ve:
         print(f"Invalid input: {ve}")
-        
+
+
 # Main function that runs the above created functions as needed
 def main():
     # Allows for use of while loop

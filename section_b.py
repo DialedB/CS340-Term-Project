@@ -85,7 +85,7 @@ def show_menu():
     print("1. Read the labelled text data file, display the first 5 lines")
     print("2. Choose the size of the hidden layers of the MLP topology (e.g. 6-?-?-2)")
     print("3. Choose the size of the training step (0.001 - 0.5, [ENTER] for adaptable)")
-    print("4. Train on 80% of labeled data, display progress graph")
+    print("4. Train the models and display the progress graphs")
     print("5. Classify the unlabeled data, output training report and confusion matrix")
     print("6. Predict if student will drop out or graduate")
     print("7. Exit the program")
@@ -106,7 +106,8 @@ def choice1 ():
         print(f"Error reading file: {e}")
 
 
-# Function that asks the user for size of hidden layers of the model's MLP topology and updates the global topologies list with the user input
+# Function that asks the user for size of hidden layers of the model's MLP topology
+# and updates the global topologies list with the user input
 def choice2():
     # Calls the topologies global variable
     global topologies
@@ -172,7 +173,8 @@ def choice3():
     print("\nCurrent learning rates: ", learning_rates)
 
 
-# Function that runs a single experiment with given parameters and returns model, loss curve, training time and test performance
+# Function that runs a single experiment with given parameters
+# and returns model, loss curve, training time and test performance
 def run_one_experiment(topology, learning_rate, train_size, randomize, X, y):
     # Outputs the specifications of the MLP model for this experiment
     print("\nStarting experiment with the following: ")
